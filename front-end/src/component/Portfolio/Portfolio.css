@@ -1,0 +1,204 @@
+/* Base Styling (Light Mode Default) */
+.portfolio-section {
+  padding: 60px 16px;
+  max-width: 1200px;
+  margin: auto;
+  font-family: "Segoe UI", sans-serif;
+  color: #222;
+  background-color: #f9f9f9;
+}
+
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.portfolio-header h2 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.portfolio-header p {
+  font-size: 1rem;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.portfolio-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.portfolio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+}
+
+.portfolio-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolio-card-body {
+  padding: 16px;
+}
+
+.portfolio-category {
+  display: inline-block;
+  background-color: #f0f0f0;
+  color: #555;
+  font-size: 0.85rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.portfolio-card-body h4 {
+  font-size: 1.1rem;
+  margin: 10px 0 8px;
+  color: #222;
+}
+
+.portfolio-card-body p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.case-study-btn {
+  padding: 8px 16px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s;
+}
+
+.case-study-btn:hover {
+  background-color: #5a52e0;
+}
+
+.portfolio-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.more-projects-btn {
+  padding: 12px 30px;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.more-projects-btn:hover {
+  background-color: #5a52e0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .portfolio-section {
+    padding: 40px 12px;
+  }
+
+  .portfolio-header h2 {
+    font-size: 2rem;
+  }
+
+  .portfolio-header p {
+    font-size: 0.95rem;
+  }
+
+  .portfolio-card-body h4 {
+    font-size: 1rem;
+  }
+
+  .portfolio-card-body p {
+    font-size: 0.9rem;
+  }
+
+  .case-study-btn,
+  .more-projects-btn {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .portfolio-card img {
+    height: 150px;
+  }
+
+  .portfolio-grid {
+    gap: 16px;
+    grid-template-columns: 1fr;
+  }
+
+  .more-projects-btn {
+    width: 100%;
+  }
+}
+
+/* 🌙 Dark Mode via body.dark */
+body.dark .portfolio-section {
+  background-color: #0f172a;
+  color: #f0f0f0;
+}
+
+body.dark .portfolio-header h2,
+body.dark .portfolio-card-body h4 {
+  color: #ffffff;
+}
+
+body.dark .portfolio-header p,
+body.dark .portfolio-card-body p {
+  color: #cccccc;
+}
+
+body.dark .portfolio-card {
+  background: #0f172a;
+  box-shadow: 0 8px 20px rgb(0, 255, 217);
+  cursor: pointer;
+}
+
+body.dark .portfolio-card:hover {
+  box-shadow: 0 12px 24px rgba(255, 255, 255, 0.06);
+}
+
+body.dark .portfolio-category {
+  background-color: #333;
+  color: #aaa;
+}
+
+body.dark .case-study-btn,
+body.dark .more-projects-btn {
+  background-color: #00ffd9;
+  color: #000;
+}
+
+body.dark .case-study-btn:hover,
+body.dark .more-projects-btn:hover {
+  background-color: #00e6c7;
+}

@@ -1,0 +1,83 @@
+:root {
+  --bg: #ffffff;
+  --text: #1e293b;
+  --title-color: #1e293b;
+  --card-bg: #f8fafc;
+  --card-icon-bg: #e2e8f0;
+}
+
+body.dark {
+  --bg: #0f172a;
+  --text: #ffffff;
+  --title-color: #ffffff;
+  --card-bg: #1e293b;
+  --card-icon-bg: #334155;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.work-process {
+  padding: 80px 20px;
+}
+
+.wp-container {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.wp-left {
+  flex: 1 1 300px;
+  max-width: 500px;
+}
+
+.wp-left h2 {
+  font-size: 2.5rem;
+  color: var(--title-color);
+  margin-bottom: 20px;
+}
+
+.wp-left p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.wp-right {
+  flex: 1 1 500px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.wp-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  transition: transform 0.2s, background 0.3s ease;
+}
+
+.wp-card:hover {
+  transform: translateY(-4px);
+}
+
+.wp-icon {
+  background: var(--card-icon-bg);
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: background 0.3s ease;
+}

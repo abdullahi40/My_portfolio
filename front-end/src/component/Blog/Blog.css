@@ -1,0 +1,181 @@
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.blog-section {
+  background-color: #f5f5f5;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+body.dark .blog-section {
+  background-color: #0f172a;
+}
+
+.blog-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+body.dark .blog-title {
+  color: #fff;
+}
+
+.blog-container > p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+body.dark .blog-container > p {
+  color: #ccc;
+}
+
+.blog-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.blog-card-1,
+.blog-card-2,
+.blog-card-3 {
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgb(0, 255, 217);
+  width: 100%;
+  max-width: 350px;
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+body.dark .blog-card-1,
+body.dark .blog-card-2,
+body.dark .blog-card-3 {
+  background-color: #0f172a;
+  box-shadow: 0 8px 20px rgb(0, 255, 217);
+  cursor: pointer;
+  transition: 0.5s ease;
+}
+
+body.dark .blog-card-1:hover,
+body.dark .blog-card-2:hover,
+body.dark .blog-card-3:hover {
+  background-color: #0f172a;
+  box-shadow: 0 8px 20px rgb(15, 23, 42);
+}
+
+.blog-card-1:hover,
+.blog-card-2:hover,
+.blog-card-3:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 20px rgb(15, 23, 42);
+}
+
+.blog-card-image img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.blog-card-content {
+  padding: 20px;
+}
+
+.blog-card-content h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+body.dark .blog-card-content h2 {
+  color: #fff;
+}
+
+.blog-card-content p {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+body.dark .blog-card-content p {
+  color: #bbb;
+}
+
+/* Dots navigation */
+.blog-dots {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.dots,
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+body.dark .dots,
+body.dark .dot {
+  background-color: #444;
+}
+
+.dots:hover,
+.dot:hover {
+  background-color: #666;
+}
+
+body.dark .dots:hover,
+body.dark .dot:hover {
+  background-color: #888;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .blog-title {
+    font-size: 2rem;
+  }
+
+  .blog-container > p {
+    font-size: 0.95rem;
+  }
+
+  .blog-card-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .blog-card-content p {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-title {
+    font-size: 1.7rem;
+  }
+
+  .blog-container > p {
+    font-size: 0.9rem;
+  }
+
+  .blog-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+}

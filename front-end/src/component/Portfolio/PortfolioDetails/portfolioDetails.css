@@ -1,0 +1,124 @@
+:root {
+  --bg-light: #ffffff;
+  --bg-dark: #121212;
+  --text-light: #000000;
+  --text-dark: #ffffff;
+  --primary: #00ffd9;
+  --primary-hover: #00e6c7;
+  --max-width: 1200px;
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+body.dark {
+  --bg: var(--bg-dark);
+  --text: var(--text-dark);
+}
+body:not(.dark) {
+  --bg: var(--bg-light);
+  --text: var(--text-light);
+}
+
+.portfolio-details {
+  background-color: var(--bg);
+  color: var(--text);
+  padding: 3rem 1rem;
+  max-width: var(--max-width);
+  margin: auto;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+  margin-top: 30px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--primary);
+}
+
+/* Swiper wrapper */
+.project-swiper {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.project-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Details section */
+.details-body {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.details-body p {
+  font-size: 1.1rem;
+  margin-bottom: 1.8rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* Button style */
+.case-study-btn {
+  background-color: var(--primary);
+  color: #000;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  transition: background-color var(--transition);
+  cursor: pointer;
+}
+
+.case-study-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.case-study-btn a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .details-body p {
+    font-size: 1rem;
+  }
+
+  .case-study-btn {
+    font-size: 0.95rem;
+    padding: 0.7rem 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-details {
+    padding: 2rem 1rem;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .details-body p {
+    font-size: 0.95rem;
+  }
+
+  .case-study-btn {
+    width: 100%;
+    font-size: 0.95rem;
+  }
+}

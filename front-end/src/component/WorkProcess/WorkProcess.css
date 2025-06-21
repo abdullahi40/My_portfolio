@@ -14,6 +14,13 @@ body.dark {
   --card-icon-bg: #334155;
 }
 
+body.dark .wp-icons a[title="Express.js"] svg {
+  filter: brightness(0) invert(1);
+}
+body.dark .wp-icons a[title="Express.js"]:hover svg {
+  filter: brightness(0.7) invert(1);
+}
+
 body {
   background-color: var(--bg);
   color: var(--text);
@@ -22,6 +29,44 @@ body {
 
 .work-process {
   padding: 80px 20px;
+}
+
+.wp-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 3px;
+  margin: 1rem 0;
+}
+
+.wp-icons a {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 8px;
+  transition: filter 0.3s ease;
+}
+
+.wp-icons a:hover svg {
+  filter: brightness(1.3);
+  cursor: pointer;
+}
+
+/* Dark mode styles */
+body.dark .wp-icons a svg {
+  filter: brightness(0.7); /* Dhim iftiinka icon-ka */
+  transition: filter 0.3s ease;
+}
+
+body.dark .wp-icons a:hover svg {
+  filter: brightness(1.1);
+}
+
+/* Responsive for small screens */
+@media (max-width: 480px) {
+  .wp-icons a svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
 }
 
 .wp-container {
@@ -61,7 +106,7 @@ body {
   background: var(--card-bg);
   border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s, background 0.3s ease;
 }
 

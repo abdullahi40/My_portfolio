@@ -1,72 +1,146 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import axios from "axios"; // ✅ Axios for HTTP requests
+import "swiper/css";
+import "swiper/css/pagination";
 import "./Blog.css";
+import LoadingDots from "../LoderDots/LoadingDots";
+import { API_URL, BLOGS } from "../Api/Api";
 
-function Blog() {
-  return (
-    <div className="blog-section">
-      <div className="blog-container">
-        <h1 className="blog-title">blog</h1>
-        <p>
-          there are many variations of passages of lorem Ipsum avaliable,
-          <br />
-          but the majority habe suffered alteration.
-        </p>
-        <div className="blog-cards">
-          <div className="blog-card-1">
-            <div className="blog-card-image">
-              <img
-                src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
-                alt="Blog"
-              />
-            </div>
-            <div className="blog-card-content">
-              <h2>Blog Title</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                at quam vel nisi facilisis aliquet.
-              </p>
-            </div>
-          </div>
-          <div className="blog-card-2">
-            <div className="blog-card-image">
-              <img
-                src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
-                alt="Blog"
-              />
-            </div>
-            <div className="blog-card-content">
-              <h2>Blog Title</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                at quam vel nisi facilisis aliquet.
-              </p>
-            </div>
-          </div>
-          <div className="blog-card-3">
-            <div className="blog-card-image">
-              <img
-                src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60"
-                alt="Blog"
-              />
-            </div>
-            <div className="blog-card-content">
-              <h2>Blog Title</h2>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque
-                at quam vel nisi facilisis aliquet.
-              </p>
-            </div>
-          </div>
+export default function Blog() {
+  // State to store the list of blogs
+  const [blogs, setBlogs] = useState([]);
+
+  // State to track loading status
+  const [loading, setLoading] = useState(true);
+
+  // Fetch blogs when component mounts
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        // Send GET request using axios
+        const response = await axios.get(`${API_URL}/${BLOGS}`);
+        const data = response.data;
+
+        // Sort blogs by newest and get the latest 10
+        const latestBlogs = data
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .slice(0, 10);
+
+        setBlogs(latestBlogs);
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+      } finally {
+        setLoading(false); // Stop loading state
+      }
+    };
+
+    fetchBlogs();
+  }, []);
+
+  // Show loading screen while data is being fetched
+  if (loading) {
+    return (
+      <div className="blog-section">
+        <div className="blog-container">
+          <h2 className="blog-title">Loading Blogs</h2>
+          <LoadingDots />
         </div>
       </div>
-      <div className="blog-dots">
-        <span className="dots"></span>
-        <span className="dots"></span>
-        <span className="dot"></span>
-        <span className="dot"></span>
+    );
+  }
+
+  // Main return with blog content
+  return (
+    <motion.div
+      className="blog-section"
+      id="blog"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <div className="blog-container">
+        {/* Blog section title */}
+        <motion.h1
+          className="blog-title"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          Latest Blogs
+        </motion.h1>
+
+        {/* Blog subtitle */}
+        <motion.p
+          className="blog-subtitle"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          Check out our latest articles and tutorials.
+        </motion.p>
+
+        {/* Swiper carousel for blog posts */}
+        <Swiper
+          spaceBetween={30}
+          pagination={{ clickable: true }}
+          slidesPerView={1}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          loop={true}
+          modules={[Autoplay, Pagination]}
+          breakpoints={{
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+        >
+          {/* Loop through each blog and display it */}
+          <>
+            {blogs.map((blog, index) => (
+              <SwiperSlide key={blog.id || index}>
+                <div className="blog-card">
+                  <Link to={`/blog/${blog.slug}`} className="blog-card-link">
+                    {/* Blog Image */}
+                    <div className="blog-card-image">
+                      <img
+                        src={blog.image_url || "default.jpg"}
+                        alt={blog.title || "Blog"}
+                      />
+                    </div>
+                    {/* Blog Content */}
+                    <div className="blog-card-content">
+                      <h2>
+                        {blog.title?.length > 20
+                          ? `${blog.title.substring(0, 20)}...`
+                          : blog.title}
+                      </h2>
+                      <p>
+                        {blog.content?.length > 100
+                          ? `${blog.content.substring(0, 100)}...`
+                          : blog.content}
+                      </p>
+                    </div>
+                  </Link>
+                </div>
+              </SwiperSlide>
+            ))}
+          </>
+        </Swiper>
+
+        {/* Link to view all blogs */}
+        <Link to={"/blogs"} className="blog-link">
+          <motion.button
+            className="blog-btn"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            All Blogs
+          </motion.button>
+        </Link>
       </div>
-    </div>
+    </motion.div>
   );
 }
-
-export default Blog;

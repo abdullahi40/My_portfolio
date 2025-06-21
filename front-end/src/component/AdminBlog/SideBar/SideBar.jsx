@@ -1,40 +1,66 @@
-// src/components/Sidebar.jsx
-import { Link } from "react-router-dom";
+// Import React hook for managing component state
+import { useState } from "react";
 
-const Sidebar = () => {
+// Import NavLink for navigation and Outlet to render nested routes
+import { NavLink, Outlet } from "react-router-dom";
+
+// Import icons from react-icons library
+import { FaRegNewspaper, FaPlusCircle, FaEdit, FaBars } from "react-icons/fa";
+
+// Import sidebar-specific CSS styles
+import "./SideBar.css";
+
+// Define and export the SideBar component
+export default function SideBar() {
+  // State to track whether the sidebar is collapsed or expanded
+  const [collapsed, setCollapsed] = useState(false);
+
+  // Function to toggle the sidebar collapse state
+  const toggleSidebar = () => {
+    setCollapsed(!collapsed);
+  };
+
   return (
-    <div
-      style={{
-        width: "200px",
-        height: "100vh",
-        backgroundColor: "#222",
-        color: "#fff",
-        padding: "20px",
-        position: "fixed",
-      }}
-    >
-      <h2>Admin Panel</h2>
-      <ul style={{ listStyle: "none", padding: 0 }}>
-        <li>
-          <Link style={linkStyle} to="/">
-            All Blogs
-          </Link>
-        </li>
-        <li>
-          <Link style={linkStyle} to="/add">
-            Add Blog
-          </Link>
-        </li>
-      </ul>
+    // Apply collapsed class conditionally based on state
+    <div className={`sidebar-layout ${collapsed ? "collapsed" : ""}`}>
+      {/* Sidebar section */}
+      <aside className="sidebar">
+        {/* Header of the sidebar with toggle button and logo */}
+        <div className="sidebar-header">
+          {/* Button to collapse/expand sidebar */}
+          <button className="toggle-btn" onClick={toggleSidebar}>
+            <FaBars />
+          </button>
+          {/* Logo text shown only when sidebar is not collapsed */}
+          <h2 className={`logo ${collapsed ? "hide" : ""}`}>AdminBlog</h2>
+        </div>
+
+        {/* Navigation menu links */}
+        <nav className="sidebar-menu">
+          {/* Link to all blog posts */}
+          <NavLink to="/admin/blogs" className="menu-item">
+            <FaRegNewspaper className="toggle-btn" />
+            <span className="menu-text">All Blogs</span>
+          </NavLink>
+
+          {/* Link to create a new blog post */}
+          <NavLink to="/admin/blog/create" className="menu-item">
+            <FaPlusCircle className="toggle-btn" />
+            <span className="menu-text">Create Blog</span>
+          </NavLink>
+
+          {/* Link to edit a blog post by slug */}
+          <NavLink to="/admin/edit/:slug" className="menu-item">
+            <FaEdit className="toggle-btn" />
+            <span className="menu-text">Edit Blog</span>
+          </NavLink>
+        </nav>
+      </aside>
+
+      {/* Main content area where nested routes will be rendered */}
+      <main className="content-area">
+        <Outlet />
+      </main>
     </div>
   );
-};
-
-const linkStyle = {
-  color: "#fff",
-  textDecoration: "none",
-  display: "block",
-  margin: "10px 0",
-};
-
-export default Sidebar;
+}

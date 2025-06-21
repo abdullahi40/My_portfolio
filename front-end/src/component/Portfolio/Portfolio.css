@@ -8,6 +8,17 @@
   background-color: #f9f9f9;
 }
 
+.portfolio-card-body p.description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  max-height: 10.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .portfolio-header {
   text-align: center;
   margin-bottom: 40px;
@@ -78,10 +89,12 @@
   margin-bottom: 15px;
 }
 
-.case-study-btn {
+/* ✅ Buttons: Same style for both light & dark mode */
+.case-study-btn,
+.more-projects-btn {
   padding: 8px 16px;
-  background-color: #6c63ff;
-  color: white;
+  background-color: #00ffd9; /* Dark mode color always */
+  color: #000;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -89,28 +102,14 @@
   transition: background-color 0.3s;
 }
 
-.case-study-btn:hover {
-  background-color: #5a52e0;
+.case-study-btn:hover,
+.more-projects-btn:hover {
+  background-color: #00e6c7;
 }
 
 .portfolio-footer {
   text-align: center;
   margin-top: 40px;
-}
-
-.more-projects-btn {
-  padding: 12px 30px;
-  background-color: #6c63ff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.more-projects-btn:hover {
-  background-color: #5a52e0;
 }
 
 /* Responsive */
@@ -179,7 +178,7 @@ body.dark .portfolio-card-body p {
 
 body.dark .portfolio-card {
   background: #0f172a;
-  box-shadow: 0 8px 20px rgb(0, 255, 217);
+  box-shadow: 0 8px 20px rgb(0, 255, 0, 0.05);
   cursor: pointer;
 }
 
@@ -192,13 +191,9 @@ body.dark .portfolio-category {
   color: #aaa;
 }
 
+/* ✅ Disable dark-specific button overrides to keep the same style */
 body.dark .case-study-btn,
 body.dark .more-projects-btn {
   background-color: #00ffd9;
   color: #000;
-}
-
-body.dark .case-study-btn:hover,
-body.dark .more-projects-btn:hover {
-  background-color: #00e6c7;
 }

@@ -9,14 +9,18 @@
   max-width: 1200px;
   margin: auto;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 3rem;
-  flex-wrap: wrap;
+  align-items: center;
 }
 
-.about-img {
+/* ✅ NEW CLASS: wrapper for image and icons */
+.about-img-wrapper {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
@@ -52,6 +56,7 @@
 
 .about-text {
   flex: 1;
+  text-align: left;
 }
 
 .about-text h1 {
@@ -110,6 +115,10 @@
     text-align: center;
   }
 
+  .about-text {
+    text-align: center;
+  }
+
   .about-text h1 {
     font-size: 2rem;
   }
@@ -123,8 +132,10 @@
   }
 }
 
-/* ✅ Small devices */
 @media (max-width: 576px) {
+  .about-img-wrapper {
+    display: none;
+  }
   .btn {
     width: 100%;
     text-align: center;

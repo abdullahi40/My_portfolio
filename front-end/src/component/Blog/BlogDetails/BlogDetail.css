@@ -1,0 +1,144 @@
+:root {
+  --max-width: 800px;
+  --accent: #1f2937;
+  --border-radius: 16px;
+
+  --light-bg: #f9f9f9;
+  --light-text: #1f2937;
+  --light-card: #ffffff;
+
+  --dark-bg: #0f172a;
+  --dark-text: #f1f5f9;
+  --dark-card: #1e293b;
+}
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  line-height: 1.8;
+  transition: all 0.3s ease;
+  padding: 0;
+  margin: 0;
+}
+
+body.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Blog Detail Layout */
+.blog-detail-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.blog-detail-content {
+  background-color: var(--light-card);
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+body.dark .blog-detail-content {
+  background-color: var(--dark-card);
+}
+
+/* loading */
+.blog-detail-loading {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+/* Title */
+.blog-detail-title {
+  font-size: 2.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--light-text); /* Default for light mode */
+}
+
+body.dark .blog-detail-title {
+  color: var(--dark-text); /* Color for dark mode */
+}
+
+/* Image */
+.blog-detail-image {
+  width: 100%;
+  height: auto;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Text */
+.blog-detail-text {
+  font-size: 1.2rem;
+  white-space: pre-line;
+  padding: 1rem 0;
+  line-height: 2;
+  color: var(--light-text); /* Default for light mode */
+}
+
+body.dark .blog-detail-text {
+  color: var(--dark-text); /* Color for dark mode */
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  font-size: 1.5rem;
+  padding: 5rem;
+  color: gray;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .blog-detail-content {
+    padding: 2rem;
+  }
+
+  .blog-detail-title {
+    font-size: 2.2rem;
+  }
+
+  .blog-detail-text {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-detail-content {
+    padding: 1.5rem;
+  }
+
+  .blog-detail-title {
+    font-size: 1.75rem;
+  }
+
+  .blog-detail-text {
+    font-size: 1rem;
+  }
+}

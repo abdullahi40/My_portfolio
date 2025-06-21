@@ -5,7 +5,8 @@ const bodyParser = require("body-parser");
 const app = express();
 const blogRoutes = require("./routes/blogRoutes.js"); // Routes for blogs
 const adminBlogRoutes = require("./routes/adminBlogRoutes.js"); // Admin routes for blogs
-const authRoutes = require("./routes/routes/auth.js"); // Authentication routes
+const authRoutes = require("./routes/AuthRoutes/auth.js"); // Authentication routes
+const contactRoutes = require("./routes/Contect/contactRoutes.js"); // Contact form routes
 const db = require("./db"); // PostgreSQL connection
 const passport = require("passport"); // For authentication
 const session = require("express-session");
@@ -22,7 +23,12 @@ app.use(
 );
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(bodyParser.json());
 
@@ -35,35 +41,10 @@ app.use("/api", authRoutes); // For authentication API
 // Admin routes for blogs API
 // Middleware to protect admin routes
 const authMiddleware = require("./middleware/authMiddleware");
-app.use("/api", authMiddleware, adminBlogRoutes);
+app.use("/api/admin", authMiddleware, adminBlogRoutes);
 
 // Contact form API endpoint
-app.post("/api/contact", async (req, res) => {
-  const { name, email, subject, message } = req.body;
-
-  try {
-    // Insert the form data into the PostgreSQL database
-    const query = `
-      INSERT INTO contacts (name, email, subject, message) 
-      VALUES ($1, $2, $3, $4)
-      RETURNING id;
-    `;
-    const values = [name, email, subject, message];
-
-    const result = await db.query(query, values);
-
-    if (result.rows.length > 0) {
-      return res.json({ success: true, message: "Message sent!" });
-    } else {
-      return res.json({ success: false, message: "Failed to save message" });
-    }
-  } catch (error) {
-    console.error("Error inserting data:", error);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
-  }
-});
+app.use("/api", contactRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

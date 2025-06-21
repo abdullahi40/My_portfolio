@@ -49,7 +49,7 @@ The goal of this project is to showcase a developer’s skills across the full s
 | ------------ | ---------- | ---------- | --------------------- |
 | React.js     | Node.js    | PostgreSQL | Framer Motion         |
 | Three.js     | Express.js |            | Bcrypt / JWT Auth     |
-| Tailwind CSS | REST API   |            | dotenv, cors, nodemon |
+| Vanila CSS | REST API   |            | dotenv, cors, nodemon |
 
 ---
 

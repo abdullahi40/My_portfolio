@@ -8,7 +8,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaRegNewspaper, FaPlusCircle, FaEdit, FaBars } from "react-icons/fa";
 
 // Import sidebar-specific CSS styles
-import "./SideBar.css";
+import "./Sidebar.css";
 
 // Define and export the SideBar component
 export default function SideBar() {

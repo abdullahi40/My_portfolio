@@ -11,7 +11,7 @@ import { FaRegNewspaper, FaPlusCircle, FaEdit, FaBars } from "react-icons/fa";
 import "./Sidebar.css";
 
 // Define and export the SideBar component
-export default function SideBar() {
+export default function Sidebar() {
   // State to track whether the sidebar is collapsed or expanded
   const [collapsed, setCollapsed] = useState(false);
 

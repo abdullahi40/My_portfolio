@@ -7,7 +7,6 @@ const blogRoutes = require("./routes/blogRoutes.js"); // Routes for blogs
 const adminBlogRoutes = require("./routes/adminBlogRoutes.js"); // Admin routes for blogs
 const authRoutes = require("./routes/AuthRoutes/auth.js"); // Authentication routes
 const contactRoutes = require("./routes/Contect/contactRoutes.js"); // Contact form routes
-const db = require("./db"); // PostgreSQL connection
 const passport = require("passport"); // For authentication
 const session = require("express-session");
 
@@ -48,6 +47,6 @@ app.use("/api", contactRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -4,8 +4,8 @@ const express = require("express");
 // Create a new router instance
 const router = express.Router();
 
-// Import the PostgreSQL connection pool from the db file
-const pool = require("../../db");
+// Import the Supabase client
+const supabase = require("../../db"); // Make sure db exports Supabase client
 
 // Define a POST route to handle contact form submissions
 router.post("/contact", async (req, res) => {
@@ -13,19 +13,30 @@ router.post("/contact", async (req, res) => {
   const { name, email, location, budget, subject, message, phone } = req.body;
 
   try {
-    // Insert the contact data into the 'contact' table using parameterized query
-    await pool.query(
-      "INSERT INTO contact (name, email, location, budget, subject, message, phone) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-      [name, email, location, budget, subject, message, phone] // values to insert
-    );
+    // Insert contact data into the 'contact' table using Supabase
+    const { error } = await supabase.from("contact").insert([
+      {
+        name,
+        email,
+        location,
+        budget,
+        subject,
+        message,
+        phone,
+      },
+    ]);
+
+    // If there was an error inserting
+    if (error) {
+      console.error("Insert error:", error.message);
+      return res.status(500).json({ error: "Failed to save contact" });
+    }
 
     // Respond with success status and message
     res.status(201).json({ message: "Contact saved!" });
   } catch (err) {
-    // Log the error to the console for debugging
-    console.error(err);
-
-    // Respond with a server error status
+    // Catch any unexpected errors
+    console.error("Unexpected server error:", err);
     res.status(500).json({ error: "Server error" });
   }
 });

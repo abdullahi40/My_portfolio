@@ -1,47 +1,56 @@
-// Import required modules
+// Import Express framework
 const express = require("express");
+
+// Create a new router instance
 const router = express.Router();
-const db = require("../db"); // Import the PostgreSQL database connection
 
-// ✅ Route: Get All Blogs
+// Import Supabase client from db.js
+const supabase = require("../db");
+
+// ✅ Route: GET all blogs
 router.get("/", async (req, res) => {
-  try {
-    // Query the database to get all blogs, ordered by newest first
-    const result = await db.query(
-      "SELECT * FROM blogs ORDER BY created_at DESC"
-    );
+  // Query Supabase to get all blog entries ordered by newest first
+  const { data, error } = await supabase
+    .from("blogs") // Target the "blogs" table
+    .select("*") // Select all columns
+    .order("created_at", { ascending: false }); // Sort by newest first
 
-    // Send the list of blogs as a JSON response
-    res.json(result.rows);
-  } catch (err) {
-    // Log any errors and return a 500 response
-    console.error("Error fetching blogs:", err);
-    res.status(500).json({ error: "Failed to fetch blogs" });
+  // If there's an error, log and respond with 500 status
+  if (error) {
+    console.error("Error fetching blogs:", error.message);
+    return res.status(500).json({ error: "Failed to fetch blogs" });
   }
+
+  // If successful, send the list of blogs as JSON
+  res.json(data);
 });
 
-// ✅ Route: Get a single blog by slug
+// ✅ Route: GET a single blog by its slug
 router.get("/:slug", async (req, res) => {
-  const { slug } = req.params; // Get slug from the request URL
+  // Extract slug from request URL
+  const { slug } = req.params;
 
-  try {
-    // Query the database for a blog with the given slug
-    const result = await db.query("SELECT * FROM blogs WHERE slug = $1", [
-      slug,
-    ]);
+  // Query Supabase to find a single blog matching the slug
+  const { data, error } = await supabase
+    .from("blogs") // Target the "blogs" table
+    .select("*") // Select all columns
+    .eq("slug", slug) // Match the slug
+    .single(); // Expect only one result
 
-    // If no blog is found, return a 404 response
-    if (result.rows.length === 0)
-      return res.status(404).json({ error: "Not found" });
-
-    // Return the found blog as JSON
-    res.json(result.rows[0]);
-  } catch (err) {
-    // Log any errors and return a 500 response
-    console.error("Error fetching blog by slug:", err);
-    res.status(500).json({ error: "Failed to fetch blog" });
+  // Handle query error
+  if (error) {
+    console.error("Error fetching blog by slug:", error.message);
+    return res.status(500).json({ error: "Failed to fetch blog" });
   }
+
+  // Handle case where no blog is found
+  if (!data) {
+    return res.status(404).json({ error: "Blog not found" });
+  }
+
+  // If successful, return the blog data as JSON
+  res.json(data);
 });
 
-// Export the router so it can be used in the main app
+// Export the router to be used in other parts of the app
 module.exports = router;

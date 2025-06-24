@@ -1,79 +1,86 @@
-// Import required modules
+// Import Express.js framework
 const express = require("express");
-const bcrypt = require("bcrypt"); // For password hashing comparison
-const db = require("../../db"); // PostgreSQL database connection
-const router = express.Router();
-const jwt = require("jsonwebtoken"); // For generating JWT tokens
-const env = require("dotenv");
+
+// Import bcrypt library for password hashing
+const bcrypt = require("bcrypt");
+
+// Import database connection (either pg or supabase depending on setup)
+const db = require("../../db");
+
+// Import JSON Web Token library for authentication
+const jwt = require("jsonwebtoken");
 
 // Load environment variables from .env file
-env.config();
+require("dotenv").config();
 
-const JWT_SECRET = process.env.JWT_SECRET; // Secret key for signing JWTs
+// Create a new Express router
+const router = express.Router();
 
-// Route for handling admin login
+// Get the JWT secret key from environment variables
+const JWT_SECRET = process.env.JWT_SECRET;
+
+// Define the route for admin login
 router.post("/admin/login", async (req, res) => {
-  // Extract login credentials from request body
+  // Destructure user_name, email, and password from the request body
   const { user_name, email, password } = req.body;
 
-  try {
-    // Query the database for the admin by username and email
-    const result = await db.query(
-      "SELECT * FROM admins WHERE username = $1 AND email = $2",
-      [user_name, email]
-    );
+  // Check if all required fields are provided
+  if (!user_name || !email || !password) {
+    return res.status(400).json({ message: "All fields are required." });
+  }
 
-    // If no matching admin is found
-    if (result.rows.length === 0) {
-      return res
-        .status(401)
-        .json({ message: "Login failed. Please check your credentials" });
+  try {
+    // Query the database to find a single admin user matching the username and email
+    const result = await db
+      .from("admins")
+      .select("*")
+      .eq("username", user_name)
+      .eq("email", email)
+      .single(); // Expect only one result
+
+    // If no matching user is found, return 401 Unauthorized
+    if (!result.data) {
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const user = result.rows[0];
+    // Extract the user from the result
+    const user = result.data;
 
-    // Compare provided password with hashed password in the database
+    // Compare the input password with the hashed password stored in the database
     const match = await bcrypt.compare(password, user.password);
 
+    // If passwords don't match, return 401 Unauthorized
     if (!match) {
-      // If passwords don't match
-      return res
-        .status(401)
-        .json({ message: "Login failed. Please check your credentials" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // If login is successful, generate a JWT token
+    // Create a JWT token with user info and expiration of 24 hours
     const token = jwt.sign(
       {
         id: user.id,
-        user_name: user.user_name,
+        user_name: user.username,
         email: user.email,
       },
       JWT_SECRET,
-      { expiresIn: "24h" } // Token expiration time
+      { expiresIn: "24h" }
     );
 
-    // (Optional) Clear token from localStorage if running in the browser
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("token");
-    }
-
-    // Return success response with the token and user info
+    // Return a successful response with the token and user info
     return res.status(200).json({
-      message: "Logged in successfully",
+      message: "Login successful",
       token,
       user: {
         id: user.id,
-        user_name: user.user_name,
+        user_name: user.username,
         email: user.email,
       },
     });
   } catch (err) {
-    // Handle server or database errors
+    // Catch and log any errors, then return a 500 Server Error
     console.error("Login error:", err);
     return res.status(500).json({ message: "Server error" });
   }
 });
 
-// Export the router so it can be used in your main app
+// Export the router to be used in the main application
 module.exports = router;

@@ -1,17 +1,12 @@
-const { Pool } = require("pg");
+const { createClient } = require("@supabase/supabase-js");
 
 const env = require("dotenv");
 
 env.config();
-// Create a new pool instance with the database connection details
 
-const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  password: process.env.PG_PASSWORD,
-  database: process.env.PG_DATABASE,
-  port: process.env.PG_PORT,
-});
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
+);
 
-module.exports = pool;
-// Get all blogs
+module.exports = supabase;

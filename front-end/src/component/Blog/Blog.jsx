@@ -9,7 +9,6 @@ import "swiper/css/pagination";
 import "./Blog.css";
 import LoadingDots from "../LoderDots/LoadingDots";
 import { API_URL, BLOGS } from "../Api/Api";
-
 export default function Blog() {
   // State to store the list of blogs
   const [blogs, setBlogs] = useState([]);
@@ -22,7 +21,9 @@ export default function Blog() {
     const fetchBlogs = async () => {
       try {
         // Send GET request using axios
-        const response = await axios.get(`${API_URL}/${BLOGS}`);
+        const response = await axios.get(
+          `${API_URL}/${BLOGS}` // Use environment variable for API URL
+        );
         const data = response.data;
 
         // Sort blogs by newest and get the latest 10

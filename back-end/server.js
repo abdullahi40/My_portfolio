@@ -24,7 +24,7 @@ app.use(
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://my-portfolio-r3dv.vercel.app",
     credentials: true,
   })
 );

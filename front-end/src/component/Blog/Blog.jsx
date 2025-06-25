@@ -5,7 +5,6 @@ import { Autoplay, Pagination } from "swiper/modules";
 import axios from "axios"; // ✅ Axios for HTTP requests
 import "swiper/css";
 import "swiper/css/pagination";
-import { motion } from "framer-motion";
 import "./Blog.css";
 import LoadingDots from "../LoderDots/LoadingDots";
 import { API_URL, BLOGS } from "../Api/Api";
@@ -25,14 +24,19 @@ export default function Blog() {
         const response = await axios.get(`${API_URL}/${BLOGS}`);
         const data = response.data;
 
-        // Sort blogs by newest and get the latest 10
-        const latestBlogs = data
-          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-          .slice(0, 10);
-
-        setBlogs(latestBlogs);
+        // Check if the response data is an array
+        if (Array.isArray(data)) {
+          const latestBlogs = data
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .slice(0, 10);
+          setBlogs(latestBlogs);
+        } else {
+          console.error("API response is not an array:", data);
+          setBlogs([]); // set empty in case of error
+        }
       } catch (error) {
-        console.error("Failed to fetch blogs:", error);
+        console.error("Error fetching blogs:", error);
+        setBlogs([]);
       } finally {
         setLoading(false); // Stop loading state
       }

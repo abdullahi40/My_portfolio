@@ -1,118 +1,114 @@
-// Import main CSS file for global styles
 import "./App.css";
-
-// Import React and required hooks
-import React, { useEffect, useState } from "react";
-
-// Import routing utilities from react-router-dom
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-// Import all page and component files
+// Header must load early (no lazy)
 import Headers from "./component/Header/Header.jsx";
-import Hero from "./component/HeroSection/Hero.jsx";
-import About from "./component/About/About.jsx";
-import WorkProcess from "./component/WorkProcess/workProcess.jsx";
-import Portfolio from "./component/Portfolio/Portfolio.jsx";
-import PortfolioDetails from "./component/Portfolio/PortfolioDetails/portfolioDetails.jsx";
-import ProjectIdia from "./component/ProjectIdia/ProjectIdia.jsx";
-import Blog from "./component/Blog/Blog.jsx";
-import WhatIDo from "./component/WhatIDo/WhatIDo.jsx";
-import TestimonialSection from "./component/TestimonialSection/TestimonialSection.jsx";
-import ContactSection from "./component/ContactSection/ContactSection.jsx";
 import Footer from "./component/Footer/Footer.jsx";
-import BlogDetail from "./component/Blog/BlogDetails/BlogDetail.jsx";
-import PaginatedBlogs from "./component/Blog/PaginatedBlogs/PaginatedBlogs.jsx";
 
-// Admin Panel Components
-import SideBar from "./component/AdminBlog/Sidebar/Sidebar.jsx";
-import AdminDashboard from "./component/AdminBlog/AdminDashboard/AdminDashboard.jsx";
-import EditBlog from "./component/AdminBlog/EditBlog/EditBlog.jsx";
-import CreateBlog from "./component/AdminBlog/CreateBlog/CreateBlog.jsx";
-import AdminLogin from "./component/AdminBlog/AdminPassword/AdminLogin.jsx";
-import PrivateRoute from "./component/AdminBlog/AdminPassword/PrivateRoute .jsx";
-
-// 404 Page
-import NotFound from "./component/404 eror/NotFound.jsx";
+// Lazy load all heavy sections and pages
+const Hero = lazy(() => import("./component/HeroSection/Hero.jsx"));
+const About = lazy(() => import("./component/About/About.jsx"));
+const WorkProcess = lazy(() =>
+  import("./component/WorkProcess/workProcess.jsx")
+);
+const Portfolio = lazy(() => import("./component/Portfolio/Portfolio.jsx"));
+const ProjectIdia = lazy(() =>
+  import("./component/ProjectIdia/ProjectIdia.jsx")
+);
+const Blog = lazy(() => import("./component/Blog/Blog.jsx"));
+const WhatIDo = lazy(() => import("./component/WhatIDo/WhatIDo.jsx"));
+const TestimonialSection = lazy(() =>
+  import("./component/TestimonialSection/TestimonialSection.jsx")
+);
+const ContactSection = lazy(() =>
+  import("./component/ContactSection/ContactSection.jsx")
+);
+const PortfolioDetails = lazy(() =>
+  import("./component/Portfolio/PortfolioDetails/portfolioDetails.jsx")
+);
+const BlogDetail = lazy(() =>
+  import("./component/Blog/BlogDetails/BlogDetail.jsx")
+);
+const PaginatedBlogs = lazy(() =>
+  import("./component/Blog/PaginatedBlogs/PaginatedBlogs.jsx")
+);
+const SideBar = lazy(() => import("./component/AdminBlog/Sidebar/Sidebar.jsx"));
+const AdminDashboard = lazy(() =>
+  import("./component/AdminBlog/AdminDashboard/AdminDashboard.jsx")
+);
+const EditBlog = lazy(() =>
+  import("./component/AdminBlog/EditBlog/EditBlog.jsx")
+);
+const CreateBlog = lazy(() =>
+  import("./component/AdminBlog/CreateBlog/CreateBlog.jsx")
+);
+const AdminLogin = lazy(() =>
+  import("./component/AdminBlog/AdminPassword/AdminLogin.jsx")
+);
+const PrivateRoute = lazy(() =>
+  import("./component/AdminBlog/AdminPassword/PrivateRoute .jsx")
+);
+const NotFound = lazy(() => import("./component/404 eror/NotFound.jsx"));
 
 function App() {
-  // Manage dark mode state from localStorage
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     return savedTheme === "dark";
   });
 
-  // Apply theme based on darkMode state
   useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.body.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
+    document.body.classList.toggle("dark", darkMode);
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
-  // Function to toggle dark/light theme
-  const toggleTheme = () => {
-    setDarkMode((prev) => !prev);
-  };
+  const toggleTheme = () => setDarkMode((prev) => !prev);
 
   return (
-    // Wrap the entire app in a router for page navigation
     <Router>
       <div className="App">
-        {/* Header with theme toggle functionality */}
         <Headers darkMode={darkMode} toggleTheme={toggleTheme} />
 
-        {/* Define all route paths */}
-        <Routes>
-          {/* Home Page Route: Shows all main sections */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <About />
-                <WorkProcess />
-                <Portfolio />
-                <ProjectIdia />
-                <Blog />
-                <WhatIDo />
-                <TestimonialSection />
-                <ContactSection />
-                <Footer />
-              </>
-            }
-          />
+        {/* Lazy loading fallback UI */}
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Hero />
+                  <About />
+                  <WorkProcess />
+                  <Portfolio />
+                  <ProjectIdia />
+                  <Blog />
+                  <WhatIDo />
+                  <TestimonialSection />
+                  <ContactSection />
+                  <Footer />
+                </>
+              }
+            />
 
-          {/* Portfolio project detail page */}
-          <Route path="/portfolio/:id" element={<PortfolioDetails />} />
+            <Route path="/portfolio/:id" element={<PortfolioDetails />} />
+            <Route path="/blog/:slug" element={<BlogDetail />} />
+            <Route path="/blogs" element={<PaginatedBlogs />} />
+            <Route path="/admin-login" element={<AdminLogin />} />
 
-          {/* Single blog post by slug */}
-          <Route path="/blog/:slug" element={<BlogDetail />} />
-
-          {/* Paginated blog list page */}
-          <Route path="/blogs" element={<PaginatedBlogs />} />
-
-          {/* Public route for admin login page */}
-          <Route path="/admin-login" element={<AdminLogin />} />
-
-          {/* Protected admin routes */}
-          <Route path="/admin" element={<PrivateRoute />}>
-            <Route path="" element={<SideBar />}>
-              <Route path="blogs" element={<AdminDashboard />} />
-              <Route path="edit/:slug" element={<EditBlog />} />
-              <Route path="blog/create" element={<CreateBlog />} />
+            <Route path="/admin" element={<PrivateRoute />}>
+              <Route path="" element={<SideBar />}>
+                <Route path="blogs" element={<AdminDashboard />} />
+                <Route path="edit/:slug" element={<EditBlog />} />
+                <Route path="blog/create" element={<CreateBlog />} />
+              </Route>
             </Route>
-          </Route>
 
-          {/* 404 Not Found route for all unknown paths */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </div>
     </Router>
   );
 }
 
-// Export the App component as the default export
 export default App;

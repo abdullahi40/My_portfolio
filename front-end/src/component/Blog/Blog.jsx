@@ -5,6 +5,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import axios from "axios"; // ✅ Axios for HTTP requests
 import "swiper/css";
 import "swiper/css/pagination";
+import { motion } from "framer-motion";
 import "./Blog.css";
 import LoadingDots from "../LoderDots/LoadingDots";
 import { API_URL, BLOGS } from "../Api/Api";

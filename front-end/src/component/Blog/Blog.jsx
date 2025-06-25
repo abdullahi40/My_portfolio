@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./Blog.css";
+import { motion } from "framer-motion";
 import LoadingDots from "../LoderDots/LoadingDots";
 import { API_URL, BLOGS } from "../Api/Api";
 

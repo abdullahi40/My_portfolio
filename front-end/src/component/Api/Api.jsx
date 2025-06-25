@@ -1,5 +1,8 @@
 // this is the API file that contains the API URL
 export const API_URL = import.meta.env.VITE_API_URL;
+
+console.log("API_URL:", API_URL);
+
 // ALL BLOGS API URL
 export const BLOGS = "blogs";
 // CONATACTS API URL

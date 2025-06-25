@@ -54,6 +54,12 @@ const NotFound = lazy(() => import("./component/404 eror/NotFound.jsx"));
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
+    // Default: dark mode if no theme is saved
+    if (!savedTheme) {
+      localStorage.setItem("theme", "dark");
+      return true;
+    }
+
     return savedTheme === "dark";
   });
 

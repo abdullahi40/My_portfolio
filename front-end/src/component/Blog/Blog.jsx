@@ -23,6 +23,7 @@ export default function Blog() {
     try {
       const response = await axios.get(`${API_URL}/${BLOGS}`);
       const data = response.data;
+      console.log("RESPONSE:", response.data); 
 
       // ✅ Xaqiiji inuu yahay array
       if (Array.isArray(data)) {

@@ -49,7 +49,6 @@ import AppcoImg3 from "../../assets/images/appco_image/appco-3.png";
 import AppcoImg4 from "../../assets/images/appco_image/appco-4.png";
 import AppcoImg5 from "../../assets/images/appco_image/appco-5.png";
 import AppcoImg6 from "../../assets/images/appco_image/appco-6.png";
-import AppcoImg7 from "../../assets/images/appco_image/appco-7.png";
 
 export const portfolioData = [
   {
@@ -248,10 +247,9 @@ export const portfolioData = [
         showcases an advanced, interactive UI for promoting AI-powered
         solutions. <br />
         <br />
-        🚀 <strong>Key Highlights:</strong> <br />
-        • Hero section with a compelling CTA to "Build Something Amazing with
-        LORA-Ai OpenAI", emphasizing productivity and intelligent automation.{" "}
-        <br />
+        🚀 <strong>Key Highlights:</strong> <br />• Hero section with a
+        compelling CTA to "Build Something Amazing with LORA-Ai OpenAI",
+        emphasizing productivity and intelligent automation. <br />
         • Professional email capture input, smooth CTA button, and animated AI
         artwork carousel. <br />
         • Trusted by leading brands section (Google, Slack, Atlassian, Dropbox,
@@ -261,11 +259,10 @@ export const portfolioData = [
         • Features that highlight instant trust, engagement, communication, and
         innovation benefits. <br />
         • Multiple futuristic images with glassmorphism-style elements and
-        glowing neon text. <br />
-        • A fully responsive blog section with trending AI articles like
-        “Understanding Machine Learning in 5 Minutes”, “The Impact of AI on
-        Creative Industries”, and “AI and Future of Software Development.”{" "}
-        <br />
+        glowing neon text. <br />• A fully responsive blog section with trending
+        AI articles like “Understanding Machine Learning in 5 Minutes”, “The
+        Impact of AI on Creative Industries”, and “AI and Future of Software
+        Development.” <br />
         <br />
         🌌 Overall, the UI is dark-themed with blue and purple neon tones, AI
         illustrations, and fluid section transitions. <br />
@@ -284,15 +281,7 @@ export const portfolioData = [
   {
     id: 6,
     title: "Appco Project",
-    images: [
-      AppcoImg1,
-      AppcoImg2,
-      AppcoImg3,
-      AppcoImg4,
-      AppcoImg5,
-      AppcoImg6,
-      AppcoImg7,
-    ],
+    images: [AppcoImg1, AppcoImg2, AppcoImg3, AppcoImg4, AppcoImg5, AppcoImg6],
     description: (
       <>
         📱 <strong>Appco</strong> — A modern, vibrant, and fully responsive app

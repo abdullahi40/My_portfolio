@@ -24,7 +24,7 @@ import BlogDetail from "./component/Blog/BlogDetails/BlogDetail.jsx";
 import PaginatedBlogs from "./component/Blog/PaginatedBlogs/PaginatedBlogs.jsx";
 
 // Admin Panel Components
-import Sidebar from "./component/AdminBlog/Sidebar/Sidebar.jsx";
+import SideBar from "./component/AdminBlog/Sidebar/SideBar.jsx";
 import AdminDashboard from "./component/AdminBlog/AdminDashboard/AdminDashboard.jsx";
 import EditBlog from "./component/AdminBlog/EditBlog/EditBlog.jsx";
 import CreateBlog from "./component/AdminBlog/CreateBlog/CreateBlog.jsx";
@@ -99,7 +99,7 @@ function App() {
 
           {/* Protected admin routes */}
           <Route path="/admin" element={<PrivateRoute />}>
-            <Route path="" element={<Sidebar />}>
+            <Route path="" element={<SideBar />}>
               <Route path="blogs" element={<AdminDashboard />} />
               <Route path="edit/:slug" element={<EditBlog />} />
               <Route path="blog/create" element={<CreateBlog />} />

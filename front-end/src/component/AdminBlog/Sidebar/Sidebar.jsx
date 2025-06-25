@@ -8,10 +8,10 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaRegNewspaper, FaPlusCircle, FaEdit, FaBars } from "react-icons/fa";
 
 // Import sidebar-specific CSS styles
-import "./Sidebar.css";
+import "./SideBar.css";
 
 // Define and export the SideBar component
-export default function Sidebar() {
+export default function SideBar() {
   // State to track whether the sidebar is collapsed or expanded
   const [collapsed, setCollapsed] = useState(false);
 

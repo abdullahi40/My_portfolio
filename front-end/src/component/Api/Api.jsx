@@ -1,6 +1,5 @@
 // this is the API file that contains the API URL
-export const API_URL = process.env.REACT_APP_API_URL;
-
+export const API_URL = import.meta.env.VITE_API_URL;
 // ALL BLOGS API URL
 export const BLOGS = "blogs";
 // CONATACTS API URL

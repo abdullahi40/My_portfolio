@@ -18,28 +18,32 @@ export default function Blog() {
   const [loading, setLoading] = useState(true);
 
   // Fetch blogs when component mounts
-  useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        // Send GET request using axios
-        const response = await axios.get(`${API_URL}/${BLOGS}`);
-        const data = response.data;
+ useEffect(() => {
+  const fetchBlogs = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/${BLOGS}`);
+      const data = response.data;
 
-        // Sort blogs by newest and get the latest 10
+      // ✅ Xaqiiji inuu yahay array
+      if (Array.isArray(data)) {
         const latestBlogs = data
           .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
           .slice(0, 10);
 
         setBlogs(latestBlogs);
-      } catch (error) {
-        console.error("Failed to fetch blogs:", error);
-      } finally {
-        setLoading(false); // Stop loading state
+      } else {
+        console.error("Expected an array but got:", data);
       }
-    };
+    } catch (error) {
+      console.error("Failed to fetch blogs:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    fetchBlogs();
-  }, []);
+  fetchBlogs();
+}, []);
+
 
   // Show loading screen while data is being fetched
   if (loading) {

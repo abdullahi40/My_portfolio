@@ -24,7 +24,7 @@ import BlogDetail from "./component/Blog/BlogDetails/BlogDetail.jsx";
 import PaginatedBlogs from "./component/Blog/PaginatedBlogs/PaginatedBlogs.jsx";
 
 // Admin Panel Components
-import SideBar from "./component/AdminBlog/Sidebar/SideBar.jsx";
+import SideBar from "./component/AdminBlog/Sidebar/Sidebar.jsx";
 import AdminDashboard from "./component/AdminBlog/AdminDashboard/AdminDashboard.jsx";
 import EditBlog from "./component/AdminBlog/EditBlog/EditBlog.jsx";
 import CreateBlog from "./component/AdminBlog/CreateBlog/CreateBlog.jsx";

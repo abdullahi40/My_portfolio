@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import axios from "axios"; // ✅ Axios for HTTP requests
-import { motion } from "framer-motion";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./Blog.css";

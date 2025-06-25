@@ -38,6 +38,7 @@ body.dark {
   background-color: var(--bg-color);
   overflow: hidden;
   position: relative;
+  margin-top: 7%;
 }
 
 /* Inner wrapper to handle animations safely */

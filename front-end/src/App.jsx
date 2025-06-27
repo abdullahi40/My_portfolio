@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Header must load early (no lazy)
 import Headers from "./component/Header/Header.jsx";
 import Footer from "./component/Footer/Footer.jsx";
+import LoadingDots from "./component/LoderDots/LoadingDots.jsx";
 
 // Lazy load all heavy sections and pages
 const Hero = lazy(() => import("./component/HeroSection/Hero.jsx"));
@@ -76,13 +77,17 @@ function App() {
         <Headers darkMode={darkMode} toggleTheme={toggleTheme} />
 
         {/* Lazy loading fallback UI */}
-        <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Suspense fallback={<div className="loading">Loading...</div>} />
+        <Suspense fallback={<LoadingDots />}>
           <Routes>
             <Route
               path="/"
               element={
                 <>
                   <Hero />
+                  <Suspense fallback={<LoadingDots />}>
+                    <Hero />
+                  </Suspense>
                   <About />
                   <WorkProcess />
                   <Portfolio />

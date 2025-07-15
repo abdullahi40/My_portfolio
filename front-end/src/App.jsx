@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Headers from "./component/Header/Header.jsx";
 import Footer from "./component/Footer/Footer.jsx";
 import LoadingDots from "./component/LoderDots/LoadingDots.jsx";
+import Certificates from "./component/Certificates/certificates.jsx";
 
 // Lazy load all heavy sections and pages
 const Hero = lazy(() => import("./component/HeroSection/Hero.jsx"));
@@ -83,12 +84,10 @@ function App() {
             <Route
               path="/"
               element={
-                <>
+                <Suspense fallback={<LoadingDots />}>
                   <Hero />
-                  <Suspense fallback={<LoadingDots />}>
-                    <Hero />
-                  </Suspense>
                   <About />
+                  <Certificates />
                   <WorkProcess />
                   <Portfolio />
                   <ProjectIdia />
@@ -97,7 +96,7 @@ function App() {
                   <TestimonialSection />
                   <ContactSection />
                   <Footer />
-                </>
+                </Suspense>
               }
             />
 

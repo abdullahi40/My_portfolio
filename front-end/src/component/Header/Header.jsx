@@ -81,6 +81,7 @@ const Header = ({ darkMode, toggleTheme }) => {
   const links = [
     { name: "home", path: "/" },
     { name: "about", path: "#about" },
+    { name: "certificates", path: "#certificates" },
     { name: "blog", path: "#blog" },
     { name: "projects", path: "#portfolio-projects" },
     { name: "contact", path: "#contact" },

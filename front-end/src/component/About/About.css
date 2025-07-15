@@ -115,6 +115,10 @@
     text-align: center;
   }
 
+  .about-img-wrapper {
+    display: none;
+  }
+
   .about-text {
     text-align: center;
   }
@@ -133,9 +137,6 @@
 }
 
 @media (max-width: 576px) {
-  .about-img-wrapper {
-    display: none;
-  }
   .btn {
     width: 100%;
     text-align: center;

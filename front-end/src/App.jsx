@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Headers from "./component/Header/Header.jsx";
 import Footer from "./component/Footer/Footer.jsx";
 import LoadingDots from "./component/LoderDots/LoadingDots.jsx";
-import Certificates from "./component/Certificates/certificates.jsx";
+import Certificates from "./component/Certificates/Certificates.jsx";
 
 // Lazy load all heavy sections and pages
 const Hero = lazy(() => import("./component/HeroSection/Hero.jsx"));

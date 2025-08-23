@@ -8,6 +8,11 @@ body.dark {
   --text: #ffffff;
 }
 
+/* Lock scroll when menu open */
+body.menu-open {
+  overflow: hidden;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -21,12 +26,10 @@ body.dark {
   right: 0;
   width: 100%;
   z-index: 999;
-  transition: top 0.4s ease, background 0.3s ease;
+  transition: transform 0.4s ease, background 0.3s ease;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.header.hide {
-  top: -100px;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .logo {
@@ -56,6 +59,8 @@ body.dark {
 .nav {
   display: flex;
   gap: 2rem;
+  margin: 0;
+  padding: 1rem 0.5rem;
 }
 
 .nav a {
@@ -91,7 +96,7 @@ body.dark {
   .nav {
     display: none;
     position: absolute;
-    top: 62px;
+    top: 60px;
     right: 0;
     flex-direction: column;
     background: var(--bg);
@@ -100,7 +105,6 @@ body.dark {
     text-align: right;
     border-bottom-left-radius: 8px;
     transition: all 0.3s ease;
-    margin-top: -20px;
   }
 
   .nav.open {
@@ -120,12 +124,10 @@ body.dark {
   }
 }
 
+/* Small mobile adjustments */
 @media screen and (max-width: 600px) {
   .header {
     padding: 0.7rem 1rem;
-    /* margin: 0 30px; */
-    left: 0;
-    top: 0;
   }
 
   .logo {

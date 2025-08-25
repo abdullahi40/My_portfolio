@@ -4,21 +4,26 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "./Certificates.css";
-
 import { CERTIFICATES } from "./CertificatesDetails.jsx";
 
 export default function Certificates() {
   const [selected, setSelected] = useState(null);
 
+  // Detect mobile
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <div className="certificates-section" id="certificates">
       <h1 className="certificates-title">My Certificates</h1>
+
       <Swiper
         spaceBetween={30}
         pagination={{ clickable: true }}
         slidesPerView={1}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
+        autoplay={
+          !isMobile ? { delay: 5000, disableOnInteraction: false } : false
+        }
         modules={[Autoplay, Pagination]}
         breakpoints={{
           640: { slidesPerView: 1 },
@@ -26,8 +31,9 @@ export default function Certificates() {
           1024: { slidesPerView: 3 },
         }}
         className="certificates-swiper"
+        grabCursor={true}
       >
-        {CERTIFICATES.map((cert, index) => (
+        {CERTIFICATES.map((cert) => (
           <SwiperSlide key={cert.name}>
             <div className="certificate-card" onClick={() => setSelected(cert)}>
               <div className="certificate-preview-wrapper">

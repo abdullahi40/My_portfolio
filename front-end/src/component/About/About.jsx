@@ -34,7 +34,7 @@ export default function About() {
           >
             {/* Facebook icon with external link */}
             <a
-              href="https://facebook.com/"
+              href="https://www.facebook.com/AbdullahiSuleiman44/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -43,7 +43,7 @@ export default function About() {
 
             {/* LinkedIn icon with external link */}
             <a
-              href="https://linkedin.com/"
+              href="https://www.linkedin.com/in/apdalla-suleiman-5a993037b/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -52,7 +52,7 @@ export default function About() {
 
             {/* GitHub icon with external link */}
             <a
-              href="https://github.com/"
+              href="https://github.com/abdullahi40"
               target="_blank"
               rel="noopener noreferrer"
             >

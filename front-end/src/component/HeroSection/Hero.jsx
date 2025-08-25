@@ -30,7 +30,7 @@ const Hero = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 990);
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty("--vh", `${vh}px`);
     };
@@ -142,42 +142,44 @@ const Hero = () => {
             )}
           </motion.div>
 
-          {/* 3D Model */}
-          <motion.div
-            className="image-content"
-            initial={{ x: 100, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ delay: 0.5, duration: 1 }}
-          >
-            <div className="model-wrapper">
-              <Canvas camera={{ position: [0, 0, 5], fov: 50 }} shadows>
-                <ambientLight intensity={0.3} />
-                <directionalLight
-                  position={[2, 5, 2]}
-                  intensity={2}
-                  castShadow
-                />
-                <Suspense fallback={null}>
-                  <Model url="/abdullahi.glb" />
-                  <OrbitControls
-                    enableZoom={false}
-                    autoRotate={!isMobile}
-                    autoRotateSpeed={2}
+          {/* 3D Model (qari mobile) */}
+          {!isMobile && (
+            <motion.div
+              className="image-content"
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: 0.5, duration: 1 }}
+            >
+              <div className="model-wrapper">
+                <Canvas camera={{ position: [0, 0, 5], fov: 50 }} shadows>
+                  <ambientLight intensity={0.3} />
+                  <directionalLight
+                    position={[2, 5, 2]}
+                    intensity={2}
+                    castShadow
                   />
-                  <Environment preset="night" background={false} />
-                  <Stars
-                    radius={100}
-                    depth={50}
-                    count={5000}
-                    factor={4}
-                    saturation={0}
-                    fade
-                  />
-                </Suspense>
-              </Canvas>
-            </div>
-          </motion.div>
+                  <Suspense fallback={null}>
+                    <Model url="/abdullahi.glb" />
+                    <OrbitControls
+                      enableZoom={false}
+                      autoRotate
+                      autoRotateSpeed={2}
+                    />
+                    <Environment preset="night" background={false} />
+                    <Stars
+                      radius={100}
+                      depth={50}
+                      count={5000}
+                      factor={4}
+                      saturation={0}
+                      fade
+                    />
+                  </Suspense>
+                </Canvas>
+              </div>
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

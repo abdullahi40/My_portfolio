@@ -24,7 +24,7 @@ app.use(
 // Middleware
 app.use(
   cors({
-    origin: "https://my-portfolio-r3dv.vercel.app",
+    origin: "https://www.abdulahi.dev", //Front-end Url
     credentials: true,
   })
 );

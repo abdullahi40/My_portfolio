@@ -8,7 +8,7 @@ import Footer from "./component/Footer/Footer.jsx";
 import LoadingDots from "./component/LoderDots/LoadingDots.jsx";
 import Certificates from "./component/Certificates/Certificates.jsx";
 
-// Lazy load all heavy sections and pages
+// Lazy load all heavy sections
 const Hero = lazy(() => import("./component/HeroSection/Hero.jsx"));
 const About = lazy(() => import("./component/About/About.jsx"));
 const WorkProcess = lazy(() =>
@@ -26,6 +26,8 @@ const TestimonialSection = lazy(() =>
 const ContactSection = lazy(() =>
   import("./component/ContactSection/ContactSection.jsx")
 );
+
+// Admin & other pages
 const PortfolioDetails = lazy(() =>
   import("./component/Portfolio/PortfolioDetails/portfolioDetails.jsx")
 );
@@ -56,66 +58,74 @@ const NotFound = lazy(() => import("./component/404 eror/NotFound.jsx"));
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
-    // Default: dark mode if no theme is saved
     if (!savedTheme) {
       localStorage.setItem("theme", "dark");
       return true;
     }
-
     return savedTheme === "dark";
   });
+
+  const [loading, setLoading] = useState(true); // State for page loader
 
   useEffect(() => {
     document.body.classList.toggle("dark", darkMode);
     localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
+  // Simulate page load delay or until all lazy components are ready
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500); // 1.5s loader
+    return () => clearTimeout(timer);
+  }, []);
+
   const toggleTheme = () => setDarkMode((prev) => !prev);
+
+  if (loading) {
+    // Loader in center screen
+    return (
+      <div className="fullscreen-loader">
+        <LoadingDots />
+      </div>
+    );
+  }
 
   return (
     <Router>
       <div className="App">
         <Headers darkMode={darkMode} toggleTheme={toggleTheme} />
 
-        {/* Lazy loading fallback UI */}
-        <Suspense fallback={<div className="loading">Loading...</div>} />
-        <Suspense fallback={<LoadingDots />}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<LoadingDots />}>
-                  <Hero />
-                  <About />
-                  <Certificates />
-                  <WorkProcess />
-                  <Portfolio />
-                  <ProjectIdia />
-                  <Blog />
-                  <WhatIDo />
-                  <TestimonialSection />
-                  <ContactSection />
-                  <Footer />
-                </Suspense>
-              }
-            />
-
-            <Route path="/portfolio/:id" element={<PortfolioDetails />} />
-            <Route path="/blog/:slug" element={<BlogDetail />} />
-            <Route path="/blogs" element={<PaginatedBlogs />} />
-            <Route path="/admin-login" element={<AdminLogin />} />
-
-            <Route path="/admin" element={<PrivateRoute />}>
-              <Route path="" element={<SideBar />}>
-                <Route path="blogs" element={<AdminDashboard />} />
-                <Route path="edit/:slug" element={<EditBlog />} />
-                <Route path="blog/create" element={<CreateBlog />} />
-              </Route>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <About />
+                <Certificates />
+                <WorkProcess />
+                <Portfolio />
+                <ProjectIdia />
+                <Blog />
+                <WhatIDo />
+                <TestimonialSection />
+                <ContactSection />
+                <Footer />
+              </>
+            }
+          />
+          <Route path="/portfolio/:id" element={<PortfolioDetails />} />
+          <Route path="/blog/:slug" element={<BlogDetail />} />
+          <Route path="/blogs" element={<PaginatedBlogs />} />
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/admin" element={<PrivateRoute />}>
+            <Route path="" element={<SideBar />}>
+              <Route path="blogs" element={<AdminDashboard />} />
+              <Route path="edit/:slug" element={<EditBlog />} />
+              <Route path="blog/create" element={<CreateBlog />} />
             </Route>
-
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+          </Route>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </Router>
   );

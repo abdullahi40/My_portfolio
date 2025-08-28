@@ -146,9 +146,11 @@ const ContactSection = () => {
                   <h4>{["Address", "Email", "Phone"][i]}</h4>
                   <p>
                     {
-                      ["New Mexico 31134", "mymail@mail.com", "00-1234 00000"][
-                        i
-                      ]
+                      [
+                        "Qardho, Somalia ",
+                        "abdullahisuleiman6683@gmail.com",
+                        "+252906080614",
+                      ][i]
                     }
                   </p>
                 </div>
@@ -176,7 +178,7 @@ const ContactSection = () => {
 
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com/in"
+              href="https://www.linkedin.com/in/apdalla-suleiman-5a993037b/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -187,7 +189,7 @@ const ContactSection = () => {
 
             {/* GitHub */}
             <a
-              href="https://github.com/"
+              href="https://github.com/abdullahi40"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -198,7 +200,7 @@ const ContactSection = () => {
 
             {/* Twitter */}
             <a
-              href="https://twitter.com"
+              href="https://x.com/ABDULLAHIS68744"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"

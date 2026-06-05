@@ -63,9 +63,9 @@ const Hero = () => {
               <strong style={{ color: "#00ffd9" }}>Abdullahi Suleiman</strong>
             </h1>
             <p>
-              I’m a passionate Front-End & Full-Stack Developer building modern,
-              fast, interactive websites and apps using React.js, Node.js,
-              Express, and PostgreSQL.
+            Full-Stack, AI, and Web3 Developer specializing in React.js, Node.js, Python, Express.js, PostgreSQL, ICP, Motoko, and Local LLM solutions.
+            I build scalable web applications, intelligent AI systems, business automation tools, and decentralized platforms that deliver performance,
+            security, and exceptional user experiences.
             </p>
 
             {/* Buttons */}
@@ -113,7 +113,7 @@ const Hero = () => {
                   }}
                   transition={{ duration: 0.6 }}
                 >
-                  <h2>2+</h2>
+                  <h2>3+</h2>
                   <p>Years Experience</p>
                 </motion.div>
                 <motion.div
@@ -124,7 +124,7 @@ const Hero = () => {
                   }}
                   transition={{ duration: 0.6 }}
                 >
-                  <h2>10+</h2>
+                  <h2>20+</h2>
                   <p>Completed Projects</p>
                 </motion.div>
                 <motion.div
@@ -135,7 +135,7 @@ const Hero = () => {
                   }}
                   transition={{ duration: 0.6 }}
                 >
-                  <h2>4</h2>
+                  <h2>10</h2>
                   <p>Full stack Projects</p>
                 </motion.div>
               </motion.div>

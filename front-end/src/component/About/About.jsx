@@ -1,7 +1,7 @@
 // Importing necessary dependencies
 import React from "react";
 import Me from "../../assets/HerroSectionImageMe/me-4.png"; // Profile image
-import { FaFacebook, FaLinkedin, FaGithub } from "react-icons/fa"; // Social media icons
+import { FaFacebook, FaLinkedin, FaGithub, FaWhatsapp } from "react-icons/fa"; // Social media icons
 import "./About.css"; // Custom CSS for styling
 import { motion } from "framer-motion"; // For animations
 
@@ -43,7 +43,7 @@ export default function About() {
 
             {/* LinkedIn icon with external link */}
             <a
-              href="https://www.linkedin.com/in/apdalla-suleiman-5a993037b/"
+              href="https://www.linkedin.com/in/abdulllahi-suleiman-5a993037b/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -58,6 +58,13 @@ export default function About() {
             >
               <FaGithub size={24} />
             </a>
+
+            <a
+            href="https://wa.me/252905442462"
+           target="_blank"
+          rel="noopener noreferrer">
+         <FaWhatsapp size={24} />
+         </a>
           </motion.div>
         </motion.div>
 
@@ -74,20 +81,15 @@ export default function About() {
 
           {/* Description paragraph */}
           <p>
-            I'm <strong>Abdullahi</strong>, a Full-Stack JavaScript Developer
-            who builds fast and responsive web apps using{" "}
-            <strong>React.js</strong>, <strong>Node.js</strong>,{" "}
-            <strong>Express</strong>, and <strong>PostgreSQL</strong>. I enjoy
-            crafting sleek UIs and robust backends with tools like{" "}
-            <strong>Tailwind CSS</strong>, <strong>Vite</strong>, and{" "}
-            <strong>Git</strong>. I'm currently working on real-world projects
-            and open to freelance or remote opportunities.
+      I'm Abdullahi, a Full-Stack, AI, and Web3 Developer specializing in React.js, Node.js, Express.js,
+      PostgreSQL, ICP, Motoko, and Local LLM solutions. I build fast, 
+      scalable, and modern web applications with a focus on performance, security, and user experience.
           </p>
 
           {/* Additional experience info */}
           <p>
-            With over 2 years of experience in the field, I have worked on a
-            variety of projects...
+      With over 3 years of hands-on experience, I have worked on a variety of real-world projects and continue to explore innovative
+      technologies that solve business challenges and create meaningful digital experiences.
           </p>
 
           {/* Buttons for Projects and Contact */}

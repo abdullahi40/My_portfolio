@@ -1,7 +1,7 @@
 // Importing necessary dependencies
 import React from "react";
 import Me from "../../assets/HerroSectionImageMe/me-4.png"; // Profile image
-import { FaFacebook, FaLinkedin, FaXTwitter, FaStackOverflow, FaGithub, FaWhatsapp } from "react-icons/fa"; // Social media icons
+import { FaFacebook, FaLinkedin, FaTwitter, FaStackOverflow, FaGithub, FaWhatsapp } from "react-icons/fa"; // Social media icons
 import "./About.css"; // Custom CSS for styling
 import { motion } from "framer-motion"; // For animations
 
@@ -50,12 +50,12 @@ export default function About() {
               <FaLinkedin size={24} />
             </a>
             
-        {/* X icon with external link */}
+        {/* X (Twitter) icon with external link */}
           <a
           href="https://x.com/ABDULLAHIS85349"
           target="_blank"
           rel="noopener noreferrer">
-          <FaXTwitter size={24} />
+          <FaTwitter size={24} />
            </a>
             
         {/* stackoverflow icon with external link */}

@@ -19,7 +19,6 @@ import {
   FaMapMarkerAlt,
   FaEnvelope,
   FaPhoneAlt,
-  FaFacebookF,
   FaLinkedinIn,
   FaGithub,
   FaTwitter,
@@ -90,6 +89,7 @@ const ContactSection = () => {
     try {
       // Sending contact data to backend API
       await Axios.post(`${API_URL}/${CONATACT}`, formData);
+
       alert(`Message sent successfully! Thank you, ${formData.name}`);
 
       // Resetting the form after successful submission
@@ -128,7 +128,8 @@ const ContactSection = () => {
           {/* Description text */}
           <motion.p variants={fadeUpScale}>
             Whether you have a fresh idea or need help improving an existing
-            project...
+            project, I'm here to help. Feel free to contact me anytime and
+            let's build something amazing together.
           </motion.p>
 
           {/* Contact information cards */}
@@ -142,13 +143,14 @@ const ContactSection = () => {
               >
                 <Icon className="icon" />
                 <div>
-                  {/* Contact title and value */}
                   <h4>{["Address", "Email", "Phone"][i]}</h4>
                   <p>
                     {
-                      ["New Mexico 31134", "mymail@mail.com", "00-1234 00000"][
-                        i
-                      ]
+                      [
+                        "Somalia",
+                        "abdullahisuleiman6683@gmail.com",
+                        "+252613053394",
+                      ][i]
                     }
                   </p>
                 </div>
@@ -157,26 +159,14 @@ const ContactSection = () => {
           </motion.div>
 
           {/* Social media icons */}
-          {/* Social media icons */}
           <motion.div
             className="social-icons"
             variants={fadeUpScale}
             style={{ display: "flex", gap: "1rem", fontSize: "1.5rem" }}
           >
-            {/* Facebook */}
-            <a
-              href="https://www.facebook.com/AbdullahiSuleiman44/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              style={{ color: "#1877F2" }}
-            >
-              <FaFacebookF />
-            </a>
-
             {/* LinkedIn */}
             <a
-              href="https://linkedin.com/in"
+              href="https://www.linkedin.com/in/abdulllahi-suleiman-5a993037b/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -187,7 +177,7 @@ const ContactSection = () => {
 
             {/* GitHub */}
             <a
-              href="https://github.com/"
+              href="https://github.com/abdullahi40"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -196,13 +186,13 @@ const ContactSection = () => {
               <FaGithub />
             </a>
 
-            {/* Twitter */}
+            {/* X (Twitter) */}
             <a
-              href="https://twitter.com"
+              href="https://x.com/ABDULLAHIS85349"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Twitter"
-              style={{ color: "#1DA1F2" }}
+              aria-label="X"
+              style={{ color: "#000" }}
             >
               <FaTwitter />
             </a>
@@ -221,10 +211,11 @@ const ContactSection = () => {
           {/* Motivation message */}
           <motion.p variants={fadeUpScale}>
             There are many unique project ideas waiting to be turned into
-            reality...
+            reality. Let's work together to create something exceptional that
+            meets your goals.
           </motion.p>
 
-          {/* Contact form starts here */}
+          {/* Contact form */}
           <motion.form className="contact-form" onSubmit={handleSubmit}>
             {/* Name, Email, Location inputs */}
             {["name", "email", "location"].map((name, i) => (
@@ -249,17 +240,22 @@ const ContactSection = () => {
               />
             ))}
 
-            {/* International phone input field */}
+            {/* International phone input */}
             <PhoneInput
-              defaultCountry="us"
+              defaultCountry="so"
               value={formData.phone}
-              onChange={(phone) => setFormData((prev) => ({ ...prev, phone }))}
+              onChange={(phone) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  phone,
+                }))
+              }
               inputStyle={{ marginBottom: "16px" }}
               className="phone-input"
               required
             />
 
-            {/* Budget and Subject fields (2-column layout) */}
+            {/* Budget and Subject */}
             <div className="half-inputs">
               {["budget", "subject"].map((name, i) => (
                 <motion.input
@@ -282,7 +278,7 @@ const ContactSection = () => {
               ))}
             </div>
 
-            {/* Message textarea */}
+            {/* Message */}
             <motion.textarea
               name="message"
               placeholder="Message*"
@@ -297,7 +293,7 @@ const ContactSection = () => {
               whileFocus={{ scale: 1.02 }}
             />
 
-            {/* Submit button */}
+            {/* Submit Button */}
             <motion.button
               type="submit"
               variants={buttonMotion}
